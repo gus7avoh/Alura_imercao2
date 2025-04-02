@@ -5,37 +5,57 @@ const Tesoura = document.getElementById("3")
 
 const resultado = document.getElementById("resultado")
 
+let escolhaJogador = null;
 
-let escolhaJogador;
 Pedra.addEventListener('click', () => {
-    let escolhaJogador = 1
-    Pedra.style.background = "light-blue";
-})
+    escolhaJogador = 1;
+    Pedra.style.background = "lightblue"; 
+    Papel.style.background = "";
+    Tesoura.style.background = "";
+    verificar()
+});
 
 Papel.addEventListener('click', () => {
-    let escolhaJogador = 2
-    Papel.style.background = "light-blue";
-})
+    escolhaJogador = 2;
+    Papel.style.background = "lightblue";
+    Pedra.style.background = "";
+    Tesoura.style.background = "";
+    verificar()
+});
 
-Tesoura.ventListener('click', () => {
-    let escolhaJogador = 3
-    Tesoura.style.background = "light-blue";
-})
+Tesoura.addEventListener('click', () => {
+    escolhaJogador = 3;
+    Tesoura.style.background = "lightblue";
+    Papel.style.background = "";
+    Pedra.style.background = "";
+    verificar()
+});
 
+function verificar(){
+    let escolhaComputador = Math.floor(Math.random() * 3 ) + 1;
 
-let escolhaComputador = Math.floor(Math.random() * 3 ) + 1;
-
-if (escolhaComputador === escolhaJogador){
-    resultado.innerHTML = "Empate!!!"
-
+    if (escolhaComputador === escolhaJogador){
+        resultado.innerHTML = "<p>Empate!!!</p>"
+    }
+    else if(  escolhaComputador ===  1 && escolhaJogador === 3 ||
+            escolhaComputador ===  2 && escolhaJogador === 1 ||
+            escolhaComputador ===  3 && escolhaJogador === 2 ){
+        
+        resultado.innerHTML = "<p>O computador venceu!!!</p>"
+    }else{
+        resultado.innerHTML = "<p>Voce venceu!!!</p>"
+    }
 }
-else if(  escolhaComputador ===  1 && escolhaJogador === 3 ||
-        escolhaComputador ===  2 && escolhaJogador === 1 ||
-        escolhaComputador ===  3 && escolhaJogador === 2 ){
-    
-    resultado.innerHTML = "O computador venceu!!!"
-}else{
-    resultado.innerHTML = "Voce venceu!!!"
+
+function jogar(){
+    Papel.style.background = "";
+    Pedra.style.background = "";
+    Tesoura.style.background = "";
+
+    resultado.innerHTML = ""
+    escolhaJogador = null
+    escolhaComputador = null
 }
+
 
 

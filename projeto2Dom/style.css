@@ -80,18 +80,20 @@ body {
     background-color: #1ABC9C;
   }
 
-  #resultado{
+  #resultado {
     height: 100px;
     width: 300px;
     padding: 10px;
     border-radius: 10px;
     background-color: white;
+    color: black;
     text-align: center;
     justify-content: center;
     font-size: 1em;
     font-weight: bold;
     margin: auto;
     margin-top: 40px;
+    margin-bottom: 40px;
   }
   
   /* Footer Styles */
