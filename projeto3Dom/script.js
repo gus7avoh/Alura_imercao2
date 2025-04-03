@@ -1,35 +1,34 @@
+function jogar() {
+    const bloco = document.getElementById("imagens");
+    const mensagem = document.getElementById("visor");
 
-function jogar(){
-    let rodada = 1
-    while(rodada <= 3 ){
-        console.log(`Rodada: ${rodada}`)
-        
-        let escolhaJogador = prompt(`Nivel ${rodada}, vidro (1, 2, 3)?`) 
-        escolhaJogador = Number(escolhaJogador.trim())
-        while (![1, 2, 3].includes(escolhaJogador) && isNaN(escolhaJogador)) {
-            escolhaJogador = prompt(`Nível ${rodada}, vidro (1, 2, 3)?`);
-            escolhaJogador = Number(escolhaJogador.trim);
-        }
-        
-        let pisoQuebrado1  =  Math.floor(Math.random() * 3) + 1;
-        let pisoQuebrado2 =  Math.floor(Math.random() * 3) + 1;
-        while(pisoQuebrado1 == pisoQuebrado2){
-            pisoQuebrado2 = Math.floor(Math.random() * 3) + 1;
+    const imagem1 = document.getElementById("img1");
+    const imagem2 = document.getElementById("img2");
+    const imagem3 = document.getElementById("img3");
+
+    bloco.style.display = "block";
+    mensagem.style.display = "block";
+    mensagem.innerHTML = "<p>Escolha um caminho!</p>";
+
+    imagem1.addEventListener("click", () => processarRodada(1));
+    imagem2.addEventListener("click", () => processarRodada(2));
+    imagem3.addEventListener("click", () => processarRodada(3));
+
+    function processarRodada(escolhaJogador) {
+        let pisoQuebrado = Math.floor(Math.random() * 3) + 1;
+
+        if (escolhaJogador === pisoQuebrado) {
+            mensagem.innerHTML = "<p>Fim de jogo! Você caiu no buraco.</p>";
+        } else {
+            mensagem.innerHTML = "<p>Parabéns! Você escolheu o caminho certo.</p>";
+            imagem1.style.background = "green";
+            imagem2.style.background = "green";
+            imagem3.style.background = "green";
         }
 
-        if(escolhaJogador === pisoQuebrado1 && escolhaJogador != pisoQuebrado2){
-            console.log(`Voce passou da ${rodada}° rodada!!`)
-            alert(`Voce passou da ${rodada}° rodada!!`)
-        }else{
-            console.log('Fim de jogo!!')
-            alert('Fim de jogo!!')
-            break;
-        }
-        rodada+=1;
-    }
-
-    if ( rodada == 4){
-        console.log("Voce venceu !!!!")
-        alert("Voce venceu !!!!")
+        // Remove os eventos para evitar múltiplas jogadas
+        imagem1.replaceWith(imagem1.cloneNode(true));
+        imagem2.replaceWith(imagem2.cloneNode(true));
+        imagem3.replaceWith(imagem3.cloneNode(true));
     }
 }
